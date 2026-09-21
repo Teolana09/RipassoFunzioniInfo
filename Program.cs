@@ -30,13 +30,39 @@ namespace RipassoFunzioniInfo
             }
             return SommaR;
         }
+        static double[] Diagonale(int[,] M)
+        {
+            int somma = 0, media = 0;
+            double[] v = new double[M.GetLength(0)];
+            for (int i = 0; i < M.GetLength(0); i++)
+            {
+                somma += M[i, i];                
+            }
+            media = somma / M.GetLength(0);
+            for (int j = 0; j < M.GetLength(0); j++)
+            {
+                v[j] = M[j, (M.GetLength(0) - 1) -j] * media;
+            }
+
+            return v;
+        }
         static void Main(string[] args)
         {
             int[,] matrice = new int[3,4];
             InserimentoVett(matrice);
             int[] somma = new int [matrice.GetLength(1)];
+            somma = SommaRighe(somma, matrice);
 
             foreach (int i in somma)
+            {
+                Console.WriteLine(" " + i);
+            }
+
+            int[,] matrice2 = new int[3,3];
+            int[] molt = new int [matrice2.GetLength(0)];
+            InserimentoVett (matrice2);
+            double[] v = Diagonale(matrice2);
+            foreach (int i in v)
             {
                 Console.WriteLine(" " + i);
             }
